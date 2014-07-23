@@ -36,6 +36,12 @@
             wortLuNews();
         }, 900000);
 
+        cflNews();
+
+        setInterval( function() {
+            cflNews();
+        }, 900000);
+
     });
 
 
@@ -267,8 +273,6 @@ function wortLuNews() {
 
             var articles =  response.responseJSON.articles;
 
-            console.log( articles )
-
             var output = '';
 
             for ( var ArticleNR = 0; ArticleNR < 5; ArticleNR++ ) {
@@ -288,5 +292,36 @@ function wortLuNews() {
     });
 
     console.log( moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated WortLu News' );
+
+}
+
+function cflNews() {
+
+    var request = $.ajax({
+        type: 'get',
+        url: 'http://getcontents.herokuapp.com/?url=http%3A%2F%2Fmobile.cfl.lu%2Fbin%2Fhelp.exe%2Fenl%3Ftpl%3Drss_feed_global',
+        complete: function( response ) {
+
+            var cfl = response.responseText;
+
+            var output = '';
+
+            $( $.parseXML( cfl ) )
+            .find("item")
+            .each( function() {
+
+                output += '<div class="panel">'
+                + '<h1>' + $(this).find("title").text() + '</h1>'
+                + $(this).find("description").text()
+                + '</div>';
+
+            });
+
+            $('.cfl').html('').append( output );
+
+        }
+    });
+
+    console.log( moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated cfl News' );
 
 }
