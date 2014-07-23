@@ -30,6 +30,12 @@
             l2events();
         }, 3600000);
 
+        wortLuNews();
+
+        setInterval( function() {
+            wortLuNews();
+        }, 900000);
+
     });
 
 
@@ -249,5 +255,38 @@ function l2events() {
     });
 
     console.log( moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated Level2 events' );
+
+}
+
+function wortLuNews() {
+
+    var request = $.ajax({
+        type: 'get',
+        url: 'http://device.wort.lu/api/v303/sites/en/sections/4f4e59a1e4b056b73debc870',
+        complete: function( response ) {
+
+            var articles =  response.responseJSON.articles;
+
+            console.log( articles )
+
+            var output = '';
+
+            for ( var ArticleNR = 0; ArticleNR < 5; ArticleNR++ ) {
+
+                var article = articles[ ArticleNR ];
+
+                output += '<div class="panel">'
+                + '<h1>' + article.title + '</h1>'
+                + article.teaser
+                + '</div>';
+
+            }
+
+            $('.news').html('').append( output );
+
+        }
+    });
+
+    console.log( moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated WortLu News' );
 
 }

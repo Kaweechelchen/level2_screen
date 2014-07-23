@@ -26,6 +26,15 @@ body:after {
     padding: 0.2em 1em 1em 1em;
     color: #777;
     margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.panel img {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
