@@ -237,23 +237,28 @@ function l2events() {
 
     var request = $.ajax({
         type: 'get',
-        url: 'http://getcontents.herokuapp.com/?url=https%3A%2F%2Fwiki.hackerspace.lu%2Fwiki%2FSpecial%3AAsk%2F-5B-5BCategory%3AEvent-5D-5D-20-5B-5BStartDate%3A%3A-3E' + moment().format('YYYY') + '-2D' + moment().format('MM') + '-2D' + moment().format('DD') + '-5D-5D-20-3Cq-3E-5B-5BHas-20organizer%3A%3AOrganisation%3ASyn2cat-5D-5D-20OR-20-5B-5BIs-20External%3A%3Ano-5D-5D-3C-2Fq-3E-20-5B-5BDo-20Announce%3A%3Ayes-5D-5D%2F-3FStartDate%2F-3FEndDate%2F-3FHas-20subtitle%2F-3FHas-20description%2F-3FIs-20Event-20of-20Type%253DIs-20type%2F-3FHas-20location%2F-3FHas-20picture%2F-3FHas-20cost%2F-3FCategory%2Fformat%253Djson%2Fsort%253DStartDate%2Forder%253Dascending%2Fsearchlabel%253DJSON-20(Internal%2C-20announceable-20events-20only%2C-20only-20upcoming-20events)',
+        url: 'http://getcontents.herokuapp.com/?url=https%3A%2F%2Fwiki.hackerspace.lu%2Fwiki%2FSpecial%3AAsk%2F-5B-5BCategory%3AEvent-5D-5D-20-5B-5BStartDate%3A%3A-3E' + moment().format('YYYY') + '-2D' + moment().format('MM') + '-2D' + moment().format('DD') + '-5D-5D-20-3Cq-3E-5B-5BHas-20organizer%3A%3AOrganisation%3ASyn2cat-5D-5D-20OR-20-5B-5BIs-20External%3A%3Ano-5D-5D-3C-2Fq-3E%2F-3FStartDate%2F-3FEndDate%2F-3FHas-20subtitle%2F-3FHas-20description%2F-3FIs-20Event-20of-20Type%253DIs-20type%2F-3FHas-20location%2F-3FHas-20picture%2F-3FHas-20cost%2F-3FCategory%2Fformat%253Djson%2Fsort%253DStartDate%2Forder%253Dascending%2Fsearchlabel%253DJSON-20(Internal%2C-20only-20upcoming-20events)',
         complete: function( response ) {
 
             var events =  JSON.parse( response.responseText );
 
             var output = '';
 
-            $.each( events.items , function( nr, l2event ) {
+            for ( var l2eventNR = 0; l2eventNR < 5; l2eventNR++ ) {
+
+                var l2event = events.items[ l2eventNR ];
+
+                var label       = $('<h1>').html( l2event.label ).text();
+                var description = $('<p>').html( l2event.has_subtitle ).text();
 
                 output += '<div class="panel">'
-                + '<h1>' + l2event.label + ' <small>'
+                + '<h1>' + label + ' <small>'
                 + moment( l2event.startdate, "YYYY-MM-DD HH:mm:ss").format( 'dddd, Do \of MMMM' )
                 + '</small></h1>'
-                + l2event.has_subtitle
+                + description
                 + '</div>';
 
-            });
+            };
 
             $('.events').html('').append( output );
 
