@@ -237,7 +237,7 @@ function l2events() {
 
     var request = $.ajax({
         type: 'get',
-        url: 'http://getcontents.herokuapp.com/?url=https%3A%2F%2Fwiki.hackerspace.lu%2Fwiki%2FSpecial%3AAsk%2F-5B-5BCategory%3AEvent-5D-5D-20-5B-5BStartDate%3A%3A-3E' + moment().format('YYYY') + '-2D' + moment().format('MM') + '-2D' + moment().format('DD') + '-5D-5D-20-3Cq-3E-5B-5BHas-20organizer%3A%3AOrganisation%3ASyn2cat-5D-5D-20OR-20-5B-5BIs-20External%3A%3Ano-5D-5D-3C-2Fq-3E%2F-3FStartDate%2F-3FEndDate%2F-3FHas-20subtitle%2F-3FHas-20description%2F-3FIs-20Event-20of-20Type%253DIs-20type%2F-3FHas-20location%2F-3FHas-20picture%2F-3FHas-20cost%2F-3FCategory%2Fformat%253Djson%2Fsort%253DStartDate%2Forder%253Dascending%2Fsearchlabel%253DJSON-20(Internal%2C-20only-20upcoming-20events)',
+        url: 'http://getcontents.herokuapp.com/?url=https://wiki.hackerspace.lu/wiki/Special:Ask/-5B-5BCategory:Event-5D-5D-20-5B-5BStartDate::-3E' + moment().format('YYYY') + '-2D' + moment().format('MM') + '-2D' + moment().format('DD') + '-5D-5D/-3FStartDate/-3FEndDate/-3FHas-20subtitle/-3FHas-20description/-3FIs-20Event-20of-20Type%3DIs-20type/-3FHas-20location/-3FHas-20picture/-3FHas-20cost/-3FCategory/format%3Djson/sort%3DStartDate/order%3Dascending/searchlabel%3DJSON-20(Internal,-20only-20upcoming-20events)',
         complete: function( response ) {
 
             var events =  JSON.parse( response.responseText );
