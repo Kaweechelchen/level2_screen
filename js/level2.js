@@ -237,7 +237,7 @@ function l2events() {
 
     var request = $.ajax({
         type: 'get',
-        url: 'http://getcontents.herokuapp.com/?url=https://wiki.hackerspace.lu/wiki/Special:Ask/-5B-5BCategory:Event-5D-5D-20-5B-5BStartDate::-3E' + moment().format('YYYY') + '-2D' + moment().format('MM') + '-2D' + moment().format('DD') + '-5D-5D/-3FStartDate/-3FEndDate/-3FHas-20subtitle/-3FHas-20description/-3FIs-20Event-20of-20Type%3DIs-20type/-3FHas-20location/-3FHas-20picture/-3FHas-20cost/-3FCategory/format%3Djson/sort%3DStartDate/order%3Dascending/searchlabel%3DJSON-20(Internal,-20only-20upcoming-20events)',
+        url: 'https://wiki.hackerspace.lu/wiki/Special:Ask/-5B-5BCategory:Event-5D-5D-20-5B-5BStartDate::-3E' + moment().format('YYYY') + '-2D' + moment().format('MM') + '-2D' + moment().format('DD') + '-5D-5D/-3FStartDate/-3FEndDate/-3FHas-20subtitle/-3FHas-20description/-3FIs-20Event-20of-20Type%3DIs-20type/-3FHas-20location/-3FHas-20picture/-3FHas-20cost/-3FCategory/format%3Djson/sort%3DStartDate/order%3Dascending/searchlabel%3DJSON-20(Internal,-20only-20upcoming-20events)',
         complete: function( response ) {
 
             var events =  JSON.parse( response.responseText );
