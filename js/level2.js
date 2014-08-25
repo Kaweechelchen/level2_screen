@@ -218,12 +218,18 @@ function l2status() {
 
             var status =  JSON.parse( response.responseText );
 
+            var timeStamp = moment.unix( status.lastchange ).format( 'HH:mm' );
+
             $('.status').removeClass('open').removeClass('closed');
 
             if ( status.state.open ) {
-                $('.status').addClass('open').text('Open');
+                $('.status')
+                    .addClass('open')
+                    .html('<h1>Open</h1>since ' + timeStamp);
             } else {
-                $('.status').addClass('closed').text('Closed');
+                $('.status')
+                    .addClass('closed')
+                    .html('<h1>Closed</h1>since ' + timeStamp);
             }
 
         }
