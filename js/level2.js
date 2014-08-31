@@ -61,7 +61,7 @@ function refreshContent() {
 
     var request = $.ajax({
       type: 'get',
-      url: 'http://getcontents.herokuapp.com/?url=http%3A%2F%2Ftravelplanner.mobiliteit.lu%2Fhafas%2Fcdt%2Fstboard.exe%2Ffn%3FL%3Dvs_stb%26input%3D200404028%26boardType%3Ddep%26time%3D' + moment().format('HH') + '%3A' + moment().format('mm') + '%26selectDate%3Dtoday%26start%3Dyes%26requestType%3D0%26maxJourneys%3D10',
+      url: 'https://getcontents.herokuapp.com/?url=http%3A%2F%2Ftravelplanner.mobiliteit.lu%2Fhafas%2Fcdt%2Fstboard.exe%2Ffn%3FL%3Dvs_stb%26input%3D200404028%26boardType%3Ddep%26time%3D' + moment().format('HH') + '%3A' + moment().format('mm') + '%26selectDate%3Dtoday%26start%3Dyes%26requestType%3D0%26maxJourneys%3D10',
       complete: function( response ) {
 
         resp = response.responseText.slice(14);
@@ -141,6 +141,7 @@ function loadWeather() {
 
     var request = $.ajax({
         type: 'get',
+        // fixme: use an api that supports https
         url: 'http://api.openweathermap.org/data/2.5/weather?units=metric&q=' + city + ',' + country + '&appid=' + appid,
         complete: function( response ) {
 
@@ -218,7 +219,7 @@ function l2status() {
 
             var status =  JSON.parse( response.responseText );
 
-            var timeStamp = moment.unix( status.lastchange ).format( 'HH:mm' );
+            var timeStamp = moment.unix( status.state.lastchange ).format( 'HH:mm' );
 
             $('.status').removeClass('open').removeClass('closed');
 
@@ -279,7 +280,7 @@ function wortLuNews() {
 
     var request = $.ajax({
         type: 'get',
-        url: 'http://device.wort.lu/api/v303/sites/en/sections/4f4e59a1e4b056b73debc870',
+        url: 'https://device.wort.lu/api/v303/sites/en/sections/4f4e59a1e4b056b73debc870',
         complete: function( response ) {
 
             var articles =  response.responseJSON.articles;
@@ -310,7 +311,7 @@ function cflNews() {
 
     var request = $.ajax({
         type: 'get',
-        url: 'http://getcontents.herokuapp.com/?url=http%3A%2F%2Fmobile.cfl.lu%2Fbin%2Fhelp.exe%2Fenl%3Ftpl%3Drss_feed_global',
+        url: 'https://getcontents.herokuapp.com/?url=http%3A%2F%2Fmobile.cfl.lu%2Fbin%2Fhelp.exe%2Fenl%3Ftpl%3Drss_feed_global',
         complete: function( response ) {
 
             var cfl = response.responseText;
