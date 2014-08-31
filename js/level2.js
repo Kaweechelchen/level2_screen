@@ -145,7 +145,9 @@ function loadWeather() {
         url: 'https://getcontents.herokuapp.com/?url=http://api.openweathermap.org/data/2.5/weather?units=metric&q=' + city + ',' + country + '&appid=' + appid,
         complete: function( response ) {
 
-            data =  JSON.parse( response.responseText );
+            resp = response.responseText.slice(14);
+
+            data =  JSON.parse( resp );
 
             weather = data.weather[0];
 
