@@ -50,8 +50,8 @@
 
 function refreshTime() {
 
-    $('.time').text( moment().format('HH:mm') );
-    $('.date').text( moment().format('dddd, Do \of MMMM') );
+    $('.time').text( moment().format('HH:mm') ); // 03:37
+    $('.date').text( moment().format('dddd, D MMMM') );  // Sunday, 31 August
 
 }
 
@@ -221,7 +221,7 @@ function l2status() {
 
             var status =  JSON.parse( response.responseText );
 
-            var timeStamp = moment.unix( status.state.lastchange ).format( 'HH:mm' );
+            var timeStamp = moment.unix( status.state.lastchange ).fromNow();
 
             $('.status').removeClass('open').removeClass('closed');
 
