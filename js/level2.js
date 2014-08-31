@@ -142,7 +142,7 @@ function loadWeather() {
     var request = $.ajax({
         type: 'get',
         // fixme: use an api that supports https
-        url: 'http://api.openweathermap.org/data/2.5/weather?units=metric&q=' + city + ',' + country + '&appid=' + appid,
+        url: 'https://getcontents.herokuapp.com/?url=http://api.openweathermap.org/data/2.5/weather?units=metric&q=' + city + ',' + country + '&appid=' + appid,
         complete: function( response ) {
 
             data =  JSON.parse( response.responseText );
