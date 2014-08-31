@@ -1,44 +1,44 @@
-!function ($) {
+! function($) {
 
-    $(function(){
+    $(function() {
         refreshTime();
-        setInterval( function() {
+        setInterval(function() {
             refreshTime();
         }, 59000);
 
         refreshContent();
 
-        setInterval( function() {
+        setInterval(function() {
             refreshContent();
         }, 60000);
 
         loadWeather();
 
-        setInterval( function() {
+        setInterval(function() {
             loadWeather();
         }, 900000);
 
         l2status();
 
-        setInterval( function() {
+        setInterval(function() {
             l2status();
         }, 60000);
 
         l2events();
 
-        setInterval( function() {
+        setInterval(function() {
             l2events();
         }, 3600000);
 
         wortLuNews();
 
-        setInterval( function() {
+        setInterval(function() {
             wortLuNews();
         }, 900000);
 
         cflNews();
 
-        setInterval( function() {
+        setInterval(function() {
             cflNews();
         }, 900000);
 
@@ -50,8 +50,8 @@
 
 function refreshTime() {
 
-    $('.time').text( moment().format('HH:mm') ); // 03:37
-    $('.date').text( moment().format('dddd, D MMMM') );  // Sunday, 31 August
+    $('.time').text(moment().format('HH:mm')); // 03:37
+    $('.date').text(moment().format('dddd, D MMMM')); // Sunday, 31 August
 
 }
 
@@ -60,75 +60,75 @@ function refreshContent() {
     $('#wrapper').html('');
 
     var request = $.ajax({
-      type: 'get',
-      url: 'https://getcontents.herokuapp.com/?url=http%3A%2F%2Ftravelplanner.mobiliteit.lu%2Fhafas%2Fcdt%2Fstboard.exe%2Ffn%3FL%3Dvs_stb%26input%3D200404028%26boardType%3Ddep%26time%3D' + moment().format('HH') + '%3A' + moment().format('mm') + '%26selectDate%3Dtoday%26start%3Dyes%26requestType%3D0%26maxJourneys%3D10',
-      complete: function( response ) {
+        type: 'get',
+        url: 'https://getcontents.herokuapp.com/?url=http%3A%2F%2Ftravelplanner.mobiliteit.lu%2Fhafas%2Fcdt%2Fstboard.exe%2Ffn%3FL%3Dvs_stb%26input%3D200404028%26boardType%3Ddep%26time%3D' + moment().format('HH') + '%3A' + moment().format('mm') + '%26selectDate%3Dtoday%26start%3Dyes%26requestType%3D0%26maxJourneys%3D10',
+        complete: function(response) {
 
-        resp = response.responseText.slice(14);
+            resp = response.responseText.slice(14);
 
-        data =  JSON.parse( resp );
+            data = JSON.parse(resp);
 
-        busses = data.journey;
+            busses = data.journey;
 
-        var content = '';
+            var content = '';
 
-        $.each(busses, function(nr, bus) {
+            $.each(busses, function(nr, bus) {
 
-            var name        = bus.pr;
-            var destination = bus.st;
+                var name = bus.pr;
+                var destination = bus.st;
 
-            if ( bus.rt != false ) {
+                if (bus.rt != false) {
 
-                var time = bus.rt.dlt;
+                    var time = bus.rt.dlt;
 
-            } else {
+                } else {
 
-                var time = bus.ti;
+                    var time = bus.ti;
 
-            }
+                }
 
-            var timeDifference;
+                var timeDifference;
 
-            var busTime = moment()
-                .set('hour', time.substring(0, 2) )
-                .set('minute', time.substring(3, 5) );
+                var busTime = moment()
+                    .set('hour', time.substring(0, 2))
+                    .set('minute', time.substring(3, 5));
 
-            timeDifference = busTime.diff( moment(), 'minutes' );
+                timeDifference = busTime.diff(moment(), 'minutes');
 
-            timeLeftMessage = 'departure in ' + timeDifference + ' minutes';
+                timeLeftMessage = 'departure in ' + timeDifference + ' minutes';
 
-            if ( timeDifference <= 5 && timeDifference > -1 ) {
+                if (timeDifference <= 5 && timeDifference > -1) {
 
-                labelColor = "danger";
+                    labelColor = "danger";
 
-            } else if ( timeDifference <= 10 && timeDifference > -1 ) {
+                } else if (timeDifference <= 10 && timeDifference > -1) {
 
-                labelColor = "warning";
+                    labelColor = "warning";
 
-            } else {
+                } else {
 
-                labelColor = "info";
-                timeLeftMessage = '';
+                    labelColor = "info";
+                    timeLeftMessage = '';
 
-            }
+                }
 
-            if ( name.indexOf("Bus") != -1 ) {
-                name = name.slice( name.indexOf("Bus ") + 4 );
-            }
+                if (name.indexOf("Bus") != -1) {
+                    name = name.slice(name.indexOf("Bus ") + 4);
+                }
 
-            content += '<h1>' + time + ' <span class="label label-' + labelColor + ' label-lg">' + name + '</span> ' + destination + '</h1>' + timeLeftMessage;
-
-
-        });
-
-        $('.busses').html('');
-        $('.busses').append( content );
+                content += '<h1>' + time + ' <span class="label label-' + labelColor + ' label-lg">' + name + '</span> ' + destination + '</h1>' + timeLeftMessage;
 
 
+            });
 
-        console.log( moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated busses' );
+            $('.busses').html('');
+            $('.busses').append(content);
 
-      }
+
+
+            console.log(moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated busses');
+
+        }
     });
 
 }
@@ -143,69 +143,69 @@ function loadWeather() {
         type: 'get',
         // fixme: use an api that supports https
         url: 'https://getcontents.herokuapp.com/?url=http://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + country + '&units=metric&appid=' + appid,
-        complete: function( response ) {
+        complete: function(response) {
 
-            data =  JSON.parse( response.responseText );
+            data = JSON.parse(response.responseText);
 
             weather = data.weather[0];
 
-            var description     = weather.description;
-            var weatherId       = weather.icon;
-            var temperature     = formatTemp( data.main.temp );
+            var description = weather.description;
+            var weatherId = weather.icon;
+            var temperature = formatTemp(data.main.temp);
 
-            $('.currentTemp').text( temperature );
-            $('.weatherIcon').attr( 'class', 'climacon ' + OWMIcon( weatherId ) );
+            $('.currentTemp').text(temperature);
+            $('.weatherIcon').attr('class', 'climacon ' + OWMIcon(weatherId));
 
-            console.log( moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated weather' );
+            console.log(moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated weather');
 
         }
     });
 
 }
 
-function formatTemp( temperature ) {
+function formatTemp(temperature) {
 
-  temperature = temperature - 273.15; // K to C
+    temperature = temperature - 273.15; // K to C
 
-  temperature = ( temperature ).toFixed(1); // 1 decimal
+    temperature = (temperature).toFixed(1); // 1 decimal
 
-  if (temperature > 10 ) {
-    temperature = Math.round( temperature ); // round up to the nearest integer
-  }
-  return temperature + '°C';
+    if (temperature > 10) {
+        temperature = Math.round(temperature); // round up to the nearest integer
+    }
+    return temperature + '°C';
 }
 
-function OWMIcon( imageCode ) {
-// Icon Name & Colour Percentage
-  var b = {
-    '01d': [ "sun" ],
-    '01n': [ "moon" ],
+function OWMIcon(imageCode) {
+    // Icon Name & Colour Percentage
+    var b = {
+        '01d': ["sun"],
+        '01n': ["moon"],
 
-    '02d': [ "cloud sun" ],
-    '02n': [ "cloud moon" ],
+        '02d': ["cloud sun"],
+        '02n': ["cloud moon"],
 
-    '03d': [ "cloud" ],
-    '03n': [ "cloud" ],
+        '03d': ["cloud"],
+        '03n': ["cloud"],
 
-    '04d': [ "cloud" ],
-    '04n': [ "cloud" ],
+        '04d': ["cloud"],
+        '04n': ["cloud"],
 
-    '09d': [ "showers sun" ],
-    '09n': [ "showers moon" ],
+        '09d': ["showers sun"],
+        '09n': ["showers moon"],
 
-    '10d': [ "rain sun" ],
-    '10n': [ "rain moon" ],
+        '10d': ["rain sun"],
+        '10n': ["rain moon"],
 
-    '11d': [ "lightning sun" ],
-    '11n': [ "lightning moon" ],
+        '11d': ["lightning sun"],
+        '11n': ["lightning moon"],
 
-    '13d': [ "snow sun" ],
-    '13n': [ "snow moon" ],
+        '13d': ["snow sun"],
+        '13n': ["snow moon"],
 
-    '50d': [ "fog sun" ],
-    '50n': [ "fog moon" ]
-  };
-  return b[ imageCode ]
+        '50d': ["fog sun"],
+        '50n': ["fog moon"]
+    };
+    return b[imageCode]
 }
 
 function l2status() {
@@ -213,15 +213,15 @@ function l2status() {
     var request = $.ajax({
         type: 'get',
         url: 'https://spaceapi.syn2cat.lu/status/json',
-        complete: function( response ) {
+        complete: function(response) {
 
-            var status =  JSON.parse( response.responseText );
+            var status = JSON.parse(response.responseText);
 
-            var timeStamp = moment.unix( status.state.lastchange ).fromNow();
+            var timeStamp = moment.unix(status.state.lastchange).fromNow();
 
             $('.status').removeClass('open').removeClass('closed');
 
-            if ( status.state.open ) {
+            if (status.state.open) {
                 $('.status')
                     .addClass('open')
                     .html('<h1>Open!</h1> Opened ' + timeStamp);
@@ -234,7 +234,7 @@ function l2status() {
         }
     });
 
-    console.log( moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated Level2 status' );
+    console.log(moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated Level2 status');
 
 }
 
@@ -243,34 +243,29 @@ function l2events() {
     var request = $.ajax({
         type: 'get',
         url: 'https://wiki.hackerspace.lu/wiki/Special:Ask/-5B-5BCategory:Event-5D-5D-20-5B-5BStartDate::-3E' + moment().format('YYYY') + '-2D' + moment().format('MM') + '-2D' + moment().format('DD') + '-5D-5D/-3FStartDate/-3FEndDate/-3FHas-20subtitle/-3FHas-20description/-3FIs-20Event-20of-20Type%3DIs-20type/-3FHas-20location/-3FHas-20picture/-3FHas-20cost/-3FCategory/format%3Djson/sort%3DStartDate/order%3Dascending/searchlabel%3DJSON-20(Internal,-20only-20upcoming-20events)',
-        complete: function( response ) {
+        complete: function(response) {
 
-            var events =  JSON.parse( response.responseText );
+            var events = JSON.parse(response.responseText);
 
             var output = '';
 
-            for ( var l2eventNR = 0; l2eventNR < 5; l2eventNR++ ) {
+            for (var l2eventNR = 0; l2eventNR < 5; l2eventNR++) {
 
-                var l2event = events.items[ l2eventNR ];
+                var l2event = events.items[l2eventNR];
 
-                var label       = $('<h1>').html( l2event.label ).text();
-                var description = $('<p>').html( l2event.has_subtitle ).text();
+                var label = $('<h1>').html(l2event.label).text();
+                var description = $('<p>').html(l2event.has_subtitle).text();
 
-                output += '<div class="panel">'
-                + '<h1>' + label + ' <small>'
-                + moment( l2event.startdate, "YYYY-MM-DD HH:mm:ss").format( 'dddd, Do \of MMMM' )
-                + '</small></h1>'
-                + description
-                + '</div>';
+                output += '<div class="panel">' + '<h1>' + label + ' <small>' + moment(l2event.startdate, "YYYY-MM-DD HH:mm:ss").format('dddd, Do \of MMMM') + '</small></h1>' + description + '</div>';
 
             };
 
-            $('.events').html('').append( output );
+            $('.events').html('').append(output);
 
         }
     });
 
-    console.log( moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated Level2 events' );
+    console.log(moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated Level2 events');
 
 }
 
@@ -279,29 +274,26 @@ function wortLuNews() {
     var request = $.ajax({
         type: 'get',
         url: 'https://device.wort.lu/api/v303/sites/en/sections/4f4e59a1e4b056b73debc870',
-        complete: function( response ) {
+        complete: function(response) {
 
-            var articles =  response.responseJSON.articles;
+            var articles = response.responseJSON.articles;
 
             var output = '';
 
-            for ( var ArticleNR = 0; ArticleNR < 5; ArticleNR++ ) {
+            for (var ArticleNR = 0; ArticleNR < 5; ArticleNR++) {
 
-                var article = articles[ ArticleNR ];
+                var article = articles[ArticleNR];
 
-                output += '<div class="panel">'
-                + '<h1>' + article.title + '</h1>'
-                + article.teaser
-                + '</div>';
+                output += '<div class="panel">' + '<h1>' + article.title + '</h1>' + article.teaser + '</div>';
 
             }
 
-            $('.news').html('').append( output );
+            $('.news').html('').append(output);
 
         }
     });
 
-    console.log( moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated WortLu News' );
+    console.log(moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated WortLu News');
 
 }
 
@@ -310,28 +302,25 @@ function cflNews() {
     var request = $.ajax({
         type: 'get',
         url: 'https://getcontents.herokuapp.com/?url=http%3A%2F%2Fmobile.cfl.lu%2Fbin%2Fhelp.exe%2Fenl%3Ftpl%3Drss_feed_global',
-        complete: function( response ) {
+        complete: function(response) {
 
             var cfl = response.responseText;
 
             var output = '';
 
-            $( $.parseXML( cfl ) )
-            .find("item")
-            .each( function() {
+            $($.parseXML(cfl))
+                .find("item")
+                .each(function() {
 
-                output += '<div class="panel">'
-                + '<h1>' + $(this).find("title").text() + '</h1>'
-                + $(this).find("description").text()
-                + '</div>';
+                    output += '<div class="panel">' + '<h1>' + $(this).find("title").text() + '</h1>' + $(this).find("description").text() + '</div>';
 
-            });
+                });
 
-            $('.cfl').html('').append( output );
+            $('.cfl').html('').append(output);
 
         }
     });
 
-    console.log( moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated cfl News' );
+    console.log(moment().format('YYYY.MM.DD - HH:mm:ss') + ' updated cfl News');
 
 }
