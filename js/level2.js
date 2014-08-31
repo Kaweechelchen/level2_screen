@@ -165,16 +165,14 @@ function loadWeather() {
 
 function formatTemp( temperature ) {
 
-  temperature = ( temperature ).toFixed(1);
+  temperature = temperature - 273.15; // K to C
+
+  temperature = ( temperature ).toFixed(1); // 1 decimal
 
   if (temperature > 10 ) {
-
-    temperature = Math.round( temperature );
-
+    temperature = Math.round( temperature ); // round up to the nearest integer
   }
-
-  return temperature + '°';
-
+  return temperature + '°C';
 }
 
 function OWMIcon( imageCode ) {
