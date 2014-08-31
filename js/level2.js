@@ -256,7 +256,7 @@ function l2events() {
                 var label = $('<h1>').html(l2event.label).text();
                 var description = $('<p>').html(l2event.has_subtitle).text();
 
-                output += '<div class="panel">' + '<h1>' + label + ' <small>' + moment(l2event.startdate, "YYYY-MM-DD HH:mm:ss").format('dddd, Do \of MMMM') + '</small></h1>' + description + '</div>';
+                output += '<div class="panel">' + '<h1>' + label + ' <small>' + moment(l2event.startdate, "YYYY-MM-DD HH:mm:ss").format('dddd, D MMMM HH:mm') + '</small></h1>' + description + '</div>';
 
             };
 
