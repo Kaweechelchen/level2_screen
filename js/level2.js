@@ -136,18 +136,16 @@ function refreshContent() {
 function loadWeather() {
 
     var city = 'Bonnevoie';
-    var country = 'lu';
+    var country = 'LU';
     var appid = '64a2215ad2f5f944abd334578763726e';
 
     var request = $.ajax({
         type: 'get',
         // fixme: use an api that supports https
-        url: 'https://getcontents.herokuapp.com/?url=http://api.openweathermap.org/data/2.5/weather?units=metric&q=' + city + ',' + country + '&appid=' + appid,
+        url: 'https://getcontents.herokuapp.com/?url=http://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + country + '&units=metric&appid=' + appid,
         complete: function( response ) {
 
-            resp = response.responseText.slice(14);
-
-            data =  JSON.parse( resp );
+            data =  JSON.parse( response.responseText );
 
             weather = data.weather[0];
 
