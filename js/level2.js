@@ -228,11 +228,11 @@ function l2status() {
             if ( status.state.open ) {
                 $('.status')
                     .addClass('open')
-                    .html('<h1>Open!</h1> ' + timeStamp);
+                    .html('<h1>Open!</h1> Opened ' + timeStamp);
             } else {
                 $('.status')
                     .addClass('closed')
-                    .html('<h1>Closed</h1>since ' + timeStamp);
+                    .html('<h1>Closed</h1> ' + timeStamp);
             }
 
         }
