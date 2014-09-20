@@ -70,7 +70,7 @@ function refreshContent() {
 
             busses = data.journey;
 
-            var content = '';
+            var content = '<div class="panel"><h1>Upcoming busses</h1>';
 
             $.each(busses, function(nr, bus) {
 
@@ -224,7 +224,7 @@ function l2status() {
             if (status.state.open) {
                 $('.status')
                     .addClass('open')
-                    .html('<h1>Open!</h1> Opened ' + timeStamp);
+                    .html('<h1>Open</h1> Opened ' + timeStamp);
             } else {
                 $('.status')
                     .addClass('closed')
@@ -245,20 +245,20 @@ function l2events() {
         url: 'https://wiki.hackerspace.lu/wiki/Special:Ask/-5B-5BCategory:Event-5D-5D-20-5B-5BStartDate::-3E' + moment().format('YYYY') + '-2D' + moment().format('MM') + '-2D' + moment().format('DD') + '-5D-5D/-3FStartDate/-3FEndDate/-3FHas-20subtitle/-3FHas-20description/-3FIs-20Event-20of-20Type%3DIs-20type/-3FHas-20location/-3FHas-20picture/-3FHas-20cost/-3FCategory/format%3Djson/sort%3DStartDate/order%3Dascending/searchlabel%3DJSON-20(Internal,-20only-20upcoming-20events)',
         complete: function(response) {
 
+			var l2event_name, l2event_ob;
+
             var events = JSON.parse(response.responseText);
 
-            var output = '';
+            var output = '<div class="panel"><h1>Level 2 events</h1>';
 
-            for (var l2eventNR = 0; l2eventNR < 5; l2eventNR++) {
+            for (l2event_name in events.results) {
 
-                var l2event = events.items[l2eventNR];
+                var l2event_ob = events.results[l2event_name];
 
-                var label = $('<h1>').html(l2event.label).text();
-                var description = $('<p>').html(l2event.has_subtitle).text();
-
-                output += '<div class="panel">' + '<h1>' + label + ' <small>' + moment(l2event.startdate, "YYYY-MM-DD HH:mm:ss").format('dddd, D MMMM HH:mm') + '</small></h1>' + description + '</div>';
+                output += '<h1>' + l2event_name + ' <small>' + moment(l2event_ob.printouts.startdate, "YYYY-MM-DD HH:mm:ss").format('dddd, D MMMM HH:mm') + '</small></h1>' + l2event_ob.printouts['Has description'][0];
 
             };
+			output += "</div>";
 
             $('.events').html('').append(output);
 
@@ -278,15 +278,17 @@ function wortLuNews() {
 
             var articles = response.responseJSON.articles;
 
-            var output = '';
+            var output = '<div class="panel"><h1>News</h1>';
 
             for (var ArticleNR = 0; ArticleNR < 5; ArticleNR++) {
 
                 var article = articles[ArticleNR];
 
-                output += '<div class="panel">' + '<h1>' + article.title + '</h1>' + article.teaser + '</div>';
+                output += '<h1>' + article.title + '</h1>' + article.teaser;
 
             }
+
+			output += '</div>';
 
             $('.news').html('').append(output);
 
@@ -306,15 +308,16 @@ function cflNews() {
 
             var cfl = response.responseText;
 
-            var output = '';
+            var output = '<div class="panel"><h1>CFL notifications</h1>';
 
             $($.parseXML(cfl))
                 .find("item")
                 .each(function() {
 
-                    output += '<div class="panel">' + '<h1>' + $(this).find("title").text() + '</h1>' + $(this).find("description").text() + '</div>';
+                    output += '<h1>' + $(this).find("title").text() + '</h1>' + $(this).find("description").text();
 
                 });
+			output += "</div>";
 
             $('.cfl').html('').append(output);
 

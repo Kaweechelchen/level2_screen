@@ -3,8 +3,8 @@
 body {
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    color: rgb(240, 175, 63);
-    background-color: rgb(60, 33, 24);
+	color: #333333;
+	background-color: rgb(245, 245, 245);
 }
 
 body:after {
@@ -20,7 +20,7 @@ body:after {
 .panel {
     font-family: 'Istok Web', sans-serif;
     position: relative;
-    box-shadow: 1px 1px 3px 2px rgba(240,175,63,0.8);
+
     padding: 0.2em 1em 1em 1em;
     margin-bottom: 15px;
     overflow: hidden;
@@ -42,28 +42,27 @@ h1, h2, h3, h4, h5, h6 {
 
 .time, .date {
     text-align: center;
-    font-weight: 600;
+    font-weight: 300;
     margin: 0;
 }
 
 .time {
-    font-size: 10em;
+    font-size: 3em;
 }
 
 .date {
     font-size: 2em;
-    margin-top: -30px;
     margin-bottom: 30px;
 }
 
 .climacon {
-    margin-top: -0.45em;
-    font-size: 15em;
+    font-size: 4em;
+	margin-bottom: 0;
 }
 
 .currentTemp {
-    margin-top: -0.2em;
-    font-size: 8em;
+    font-size: 1em;
+	text-align: center;
 }
 
 .row {
@@ -71,15 +70,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .weather {
-    margin-top: 35px;
-    opacity: 0.8;
 }
 
 .logo {
     text-align: center;
     font-size: 8em;
-    margin-top: 35px;
-    opacity: 0.8;
 }
 
 .open {
@@ -91,12 +86,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .status {
+	padding: 1em;
     text-align: center;
     color: #fff;
+	font-size: 2em;
 }
 
 .status h1 {
-    font-size: 7em;
+    font-size: 4em;
     margin: 0;
     line-height: 1em;
+}
+
+/* Secondary row of boxes */
+.busses h1:first-child, .cfl h1:first-child, .events h1:first-child, .news h1:first-child {
+	border-bottom: 1px solid #333333;
 }

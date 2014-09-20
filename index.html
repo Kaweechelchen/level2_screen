@@ -12,53 +12,43 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
     </head>
     <body>
-
         <div class="container-fluid">
 
-            <div class="row hidden-xs">
-
-                <div class="col-md-4 logo hidden-sm">
+            <div class="row">
+                <div class="col-md-4 logo">
                     Level2
                 </div>
 
-                <div class="col-md-4 col-sm-6 datetime">
-
-                    <h1 class="time"></h1>
-                    <h3 class="date"></h3>
-
+                <div class="col-md-4">
+                    <div class="panel status"></div>
                 </div>
 
-                <div class="col-md-4 col-sm-6 weather">
-
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <span class="weatherIcon"></span>
-                        </div>
-                        <div class="col-xs-6">
-                            <h1 class="currentTemp"></h1>
-                        </div>
-                    </div>
-
+                <div class="col-md-4 datetime">
+                    <h1 class="time"></h1>
+                    <h3 class="date"></h3>
+					<span class="weatherIcon">
+						<span class="currentTemp"></span>
+					</span>
                 </div>
 
             </div>
 
             <div class="row">
+				<div class="col-md-3 busses">
+                </div>
 
-                <div class="col-md-4">
-                    <div class="panel status"></div>
-                    <div class="events"></div>
+				<div class="col-md-3 cfl">
                 </div>
-                <div class="col-md-4">
-                    <div class="panel busses"></div>
-                    <div class="cfl visible-lg-block visible-md-block"></div>
-                </div>
-                <div class="col-md-4 news visible-lg-block visible-md-block">
+
+				<div class="col-md-3 events">
+				</div>
+
+				<div class="col-md-3 news">
                 </div>
 
             </div>
 
-        </div>
+		</div><!-- end of fluid contianer -->
 
     <script src="js/jquery.min.js"></script>
     <script src="js/moment.min.js"></script>
