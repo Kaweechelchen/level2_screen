@@ -75,6 +75,7 @@ h1, h2, h3, h4, h5, h6 {
 .logo {
     text-align: center;
     font-size: 4em;
+	font-size: 9vmin;
 }
 
 .open {
@@ -90,6 +91,9 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     color: #fff;
 	font-size: 2em;
+	font-size: 4vmin;
+	width: 100%;
+	height: 100%;
 }
 
 .status h1 {
