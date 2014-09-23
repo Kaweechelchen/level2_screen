@@ -78,8 +78,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .logo {
-    text-align: center;
+    text-align: left;
     font-size: 4em;
+	margin-left: -67px;
+}
+
+.logo img {
+	height: 100px;
+}
+
+.logo .row > div:first-child {
+	text-align: right;
 }
 
 .open {
@@ -108,4 +117,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Secondary row of boxes */
 .busses h1:first-child, .cfl h1:first-child, .events h1:first-child, .news h1:first-child {
 	border-bottom: 1px solid #333333;
+}
+
+.events, .cfl {
+	background-color: #e7e7e7;
 }
