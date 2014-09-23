@@ -224,15 +224,13 @@ function l2status() {
             if (status.state.open) {
                 $('.status')
                     .addClass('open')
-                    .html('<h1>Open</h1> Opened ' + timeStamp);
+                    .html('<h1>Open</h1> Opened ' + timeStamp + "<br>" +
+					'<div class="hackers">' +status.sensors.people_now_present[0].value + ' people inside</div>' );
             } else {
                 $('.status')
                     .addClass('closed')
                     .html('<h1>Closed</h1> ' + timeStamp);
             }
-
-            $('.NbrHackers').text( status.sensors.people_now_present[0].value + ' people inside' );
-
         }
     });
 
