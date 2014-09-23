@@ -231,6 +231,8 @@ function l2status() {
                     .html('<h1>Closed</h1> ' + timeStamp);
             }
 
+            $('.NbrHackers').text( status.sensors.people_now_present[0].value + ' Hackers' );
+
         }
     });
 
