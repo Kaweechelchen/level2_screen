@@ -80,11 +80,15 @@ h1, h2, h3, h4, h5, h6 {
 .logo {
     text-align: left;
     font-size: 4em;
-	margin-left: -67px;
+}
+
+.logo > .row > div {
+	margin-left: -20px;
 }
 
 .logo img {
 	height: 100px;
+	padding-right: 10px;
 }
 
 .logo .row > div:first-child {

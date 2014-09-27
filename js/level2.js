@@ -256,7 +256,7 @@ function l2events() {
 
                 var l2event_ob = events.results[l2event_name];
 
-                output += '<h1>' + l2event_name + ' <small>' + moment.unix(l2event_ob.printouts.StartDate, "YYYY-MM-DD HH:mm:ss").format('dddd, D MMMM HH:mm') + '</small></h1>' + l2event_ob.printouts['Has description'][0];
+                output += '<h1>' + l2event_name + ' <small><br>' + moment.unix(l2event_ob.printouts.StartDate, "YYYY-MM-DD HH:mm:ss").format('dddd, D MMMM HH:mm') + '</small></h1>' + l2event_ob.printouts['Has description'][0];
 
             };
 			output += "</div>";
