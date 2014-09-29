@@ -73,13 +73,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hackers {
-	font-size: 0.4em;
+	font-size: 0.38em;
 	margin-bottom: 1em;
 }
 
 .logo {
     text-align: left;
     font-size: 4em;
+	min-height: 134px;
 }
 
 .logo > .row > div {
