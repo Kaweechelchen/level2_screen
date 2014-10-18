@@ -255,8 +255,20 @@ function l2events() {
             for (l2event_name in events.results) {
 
                 var l2event_ob = events.results[l2event_name];
-
-                output += '<h1>' + l2event_name + ' <small><br>' + moment.unix(l2event_ob.printouts.StartDate, "YYYY-MM-DD HH:mm:ss").format('dddd, D MMMM HH:mm') + '</small></h1>' + l2event_ob.printouts['Has description'][0];
+                console.log(l2event_ob);
+                // calculate start date
+                var tsStartDate = l2event_ob.printouts.StartDate[0] * 1000;
+                var startDate = moment.tz(tsStartDate, "GMT");
+                // calculate end date
+                var tsEndDate = l2event_ob.printouts.EndDate[0] * 1000;
+                var endDate = moment.tz(tsEndDate, "GMT");
+                // do not show hour if event spans over entire days
+                if (startDate.format('HH:mm') == '00:00' && endDate.format('HH:mm') == '00:00') {
+                    startDate = startDate.format('dddd, D MMMM');
+                } else {
+                    startDate = startDate.format('dddd, D MMMM HH:mm');
+                }
+                output += '<h1>' + l2event_name + ' <small><br>' + startDate + '</small></h1>' + l2event_ob.printouts['Has description'][0];
 
             };
 			output += "</div>";
