@@ -255,7 +255,6 @@ function l2events() {
             for (l2event_name in events.results) {
 
                 var l2event_ob = events.results[l2event_name];
-                console.log(l2event_ob);
                 // calculate start date
                 var tsStartDate = l2event_ob.printouts.StartDate[0] * 1000;
                 var startDate = moment.tz(tsStartDate, "GMT");
