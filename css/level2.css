@@ -69,12 +69,30 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 15px;
 }
 
-.weather {
+.weather { }
+
+.hackers {
+	font-size: 0.38em;
+	margin-bottom: 1em;
 }
 
 .logo {
-    text-align: center;
+    text-align: left;
     font-size: 4em;
+	min-height: 134px;
+}
+
+.logo > .row > div {
+	margin-left: -20px;
+}
+
+.logo img {
+	height: 100px;
+	padding-right: 15px;
+}
+
+.logo .row > div:first-child {
+	text-align: right;
 }
 
 .open {
@@ -103,4 +121,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Secondary row of boxes */
 .busses h1:first-child, .cfl h1:first-child, .events h1:first-child, .news h1:first-child {
 	border-bottom: 1px solid #333333;
+}
+
+.events, .cfl {
+	background-color: #e7e7e7;
 }
